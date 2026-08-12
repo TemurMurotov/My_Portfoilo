@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temurbek | Portfolio</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body>
+
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#hero" class="logo">Temurbek or TimaCoder</a>
+            <ul class="nav-links">
+                <li><a href="#about">Men haqimda</a></li>
+                <li><a href="#projects">Loyihalar</a></li>
+                <li><a href="#contact">Bog'lanish</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <h1>Salom, men <span>Temurbek</span></h1>
+            <p class="subtitle">Django Framework Web Dasturchi</p>
+            <a href="#projects" class="btn">Loyihalarimni ko'rish</a>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2>Men haqimda</h2>
+            <p>
+                Men — Kompyuter injiniringi talabasi va Backend dasturlashga qiziquvchi dasturchiman.
+                Python va Django bilan ishlayman hamda zamonaviy web-loyihalar yaratishni o‘rganmoqdaman.
+                Maqsadim — kuchli Backend Developer bo‘lish va real loyihalar orqali tajriba orttirish.
+            </p>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2>Loyihalarim</h2>
+            <div class="projects-grid">
+                {% for project in projects %}
+                <div class="project-card">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                    {% endif %}
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.description }}</p>
+                    <p class="tech-stack">{{ project.tech_stack }}</p>
+                    <div class="project-links">
+                        {% if project.github_url %}
+                            <a href="{{ project.github_url }}" target="_blank">GitHub</a>
+                        {% endif %}
+                        {% if project.live_url %}
+                            <a href="{{ project.live_url }}" target="_blank">Live</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                    <p>Hozircha loyihalar qo'shilmagan.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Bog'lanish</h2>
+            <div class="social-links">
+                {% for link in social_links %}
+                    <a href="{{ link.url }}" target="_blank">{{ link.platform }}</a>
+                {% empty %}
+                    <p>Ijtimoiy tarmoq havolalari qo'shilmagan.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
